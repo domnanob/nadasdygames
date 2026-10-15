@@ -18,7 +18,7 @@ try {
     require_once __DIR__ . '/../includes/database.php';
     $conn = kepzesi_database_connection('kepzesi_games');
     $games = $conn->query('SELECT id, name, link, type, image_path FROM games ORDER BY sort_order, id')->fetchAll();
-} catch (PDOException $exception) {
+} catch (PDOException | RuntimeException $exception) {
     error_log('Game admin database error: ' . $exception->getMessage());
     $databaseUnavailable = true;
     $errors[] = 'Nem érhető el a játékkatalógus. Ellenőrizd a SQLite-adatbázis fájljának és mappájának jogosultságait, valamint hogy elérhető-e a PHP PDO SQLite bővítménye.';
